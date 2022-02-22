@@ -1,0 +1,48 @@
+
+<div *ngIf="isLoggedIn; else loggedOut">
+    Logat cu rol {{roles}}.
+  </div>
+
+
+<div class="login-body">
+  
+  <div id="login-wrapper">
+
+    <div id="login-container">
+      <span class="title">Clinică Medicală</span>
+
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+
+            <input type="text" autocomplete="off" class="ui-inputtext ui-corner-all ui-state-default ui-widget"
+              placeholder="Nume utilizator" name="username" [(ngModel)]="form.username" #username="ngModel" required />
+            <div *ngIf="f.submitted && username.invalid">
+              <div *ngIf="username.errors.required">Numele de utilizator este obligatoriu</div>
+            </div>
+          </div>
+          <div class="ui-g-12">
+
+            <input type="password" autocomplete="off" class="ui-inputtext ui-corner-all ui-state-default ui-widget"
+              placeholder="Parola" name="password" [(ngModel)]="form.password" #password="ngModel" required
+              minlength="6" />
+            <div *ngIf="f.submitted && password.invalid">
+              <div *ngIf="password.errors.required">Parola este obligatorie</div>
+              <div *ngIf="password.errors.minlength">Parola trebuie să aibă minim 6 caractere</div>
+            </div>
+          </div>
+          <div class="ui-g-12">
+            <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left">Login</button>
+            <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+              Login nereușit: {{errorMessage}}
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+  
+
+</div>

@@ -1,0 +1,75 @@
+<p-dialog header="Detalii utilizator" [(visible)]="display" [modal]="true" [responsive]="true" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '800px', minWidth: '200px'}" [minY]="500" [maximizable]="true" [baseZIndex]="10000">
+    <form [formGroup]="userform" (ngSubmit)="onSubmit()">
+        <p-panel header="{{pageTitle}}">
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px; height: fit-content">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Username *:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input pInputText type="text" formControlName="username" placeholder="Obligatoriu" />
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <p-message severity="error" text="Username este obligatoriu"
+                            *ngIf="!userform.controls['username'].valid&&userform.controls['username'].dirty">
+                        </p-message>
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Parola *:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input pInputText type="password" formControlName="password"
+                            placeholder="Obligatoriu - Min(6)" />
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <p-message severity="error"
+                            [text]="userform.controls['password'].errors['required'] ? 'Parola este obligatorie' : userform.controls['password'].errors['minlength'] ? 'Trebuie sa aiba minim 6 caractere' : ''"
+                            *ngIf="!userform.controls['password'].valid&&userform.controls['password'].dirty">
+                        </p-message>
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Rol *:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <p-dropdown [options]="roles" formControlName="role"></p-dropdown>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <p-message severity="error" text="Rolul este obligatoriu"
+                            *ngIf="!userform.controls['role'].valid&&userform.controls['role'].dirty"></p-message>
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2"></div>
+                    <div class="ui-grid-col-3">
+                        <button pButton type="submit" label="Salvează" [disabled]="!userform.valid"></button>
+                    </div>
+                    <div class="ui-grid-col-3">
+                        <button type="button" pButton icon="pi pi-close" (click)="display=false" label="Anulează"
+                            class="ui-button-secondary" routerLink="/admin/users"></button>
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+
+                <!--
+                <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+                    Form Submitted
+                    <br>
+                    {{diagnostic}}
+                </div>
+                -->
+            </div>
+        </p-panel>
+
+    </form>
+    <p-footer>
+
+    </p-footer>
+</p-dialog>

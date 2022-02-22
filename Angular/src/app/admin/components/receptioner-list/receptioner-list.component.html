@@ -1,0 +1,30 @@
+<p-table [value]="receptioners" [responsive]="true" [autoLayout]="true">
+  <ng-template pTemplate="caption">
+    Lista recepționerilor
+  </ng-template>
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Id</th>
+          <th>Nume</th>
+          <th>Data angajării</th>
+          <th>Email</th>
+          <th></th>
+          
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-receptioner>
+      <tr>
+          <td>{{receptioner.id}}</td>
+          <td>{{receptioner.nume}}</td>
+          <td>{{receptioner.dataAngajarii}}</td>
+          <td>{{receptioner.email}}</td>
+          <td>
+              <button pButton type="button" class="ui-button-info" icon="pi pi-pencil"
+              pTooltip="Editează" tooltipPosition="top" placeholder="Top"
+              (click)="editReceptionerClick(receptioner.id)"></button>
+          </td>
+         
+      </tr>
+  </ng-template>
+
+</p-table>

@@ -1,0 +1,98 @@
+<p-dialog header="Detalii medic" [(visible)]="display" [modal]="true" [responsive]="true" [contentStyle]="{'overflow':'visible'}"
+  [style]="{width: '800px', minWidth: '200px'}" [minY]="500" [maximizable]="true" [baseZIndex]="10000">
+
+  <form [formGroup]="medicform" (ngSubmit)="onSubmit()">
+    <p-panel header="{{pageTitle}}">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px; height: auto">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Nume *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="text" formControlName="nume" placeholder="Obligatoriu" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Numele este obligatoriu"
+              *ngIf="!medicform.controls['nume'].valid&&medicform.controls['nume'].dirty">
+            </p-message>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Cod parafă *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="text" formControlName="codParafa" placeholder="Obligatoriu - Min(6)" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error"
+              [text]="medicform.controls['codParafa'].errors['required'] ? 'Codul de parafă este obligatorie' : medicform.controls['codParafa'].errors['minlength'] ? 'Trebuie să aibă minim 6 caractere' : ''"
+              *ngIf="!medicform.controls['codParafa'].valid&&medicform.controls['codParafa'].dirty">
+            </p-message>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Specialitate *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="text" formControlName="specialitate" placeholder="Obligatoriu" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Specialitatea este obligatorie"
+              *ngIf="!medicform.controls['specialitate'].valid&&medicform.controls['specialitate'].dirty">
+            </p-message>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Data angajării *:
+          </div>
+          <div class="ui-grid-col-6">
+            <p-calendar formControlName="dataAngajarii" placeholder="Obligatoriu" dateFormat="yy-mm-dd"
+              [monthNavigator]="true" [yearNavigator]="true" yearRange="1990:2030"></p-calendar>
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Data angajării este obligatorie"
+              *ngIf="!medicform.controls['dataAngajarii'].valid&&medicform.controls['dataAngajarii'].dirty">
+            </p-message>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Email :
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="text" formControlName="email" />
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"></div>
+          <div class="ui-grid-col-3">
+            <button pButton type="submit" label="Salvează" [disabled]="!medicform.valid"></button>
+          </div>
+          <div class="ui-grid-col-3">
+            <button type="button" pButton icon="pi pi-close" (click)="onCancel()" label="Anulează"
+              class="ui-button-secondary"></button>
+          </div>
+          <div class="ui-grid-col-4"></div>
+        </div>
+
+        <!--
+        <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+          Form Submitted
+          <br>
+          {{diagnostic}}
+        </div>
+-->
+      </div>
+    </p-panel>
+  </form>
+
+
+</p-dialog>

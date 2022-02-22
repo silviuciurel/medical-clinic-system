@@ -1,0 +1,50 @@
+<p-table #dt [columns]="cols" [value]="pacients" [responsive]="true" [autoLayout]="true">
+  <ng-template pTemplate="caption">
+    Lista pacienților
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+    </tr>
+    <tr>
+        <th *ngFor="let col of columns" [ngSwitch]="col.field">
+          <input *ngSwitchCase="'nume'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="caută după nume">
+          <input *ngSwitchCase="'cnp'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="caută după CNP">
+        </th>
+    </tr>
+</ng-template>
+  <ng-template pTemplate="body" let-pacient>
+      <tr>
+          <td>{{pacient.id}}</td>
+          <td>{{pacient.nume}}</td>
+          <td>{{pacient.cnp}}</td>
+          <td>{{pacient.dataNasterii}}</td>
+          <td>{{pacient.adresa}}</td>
+          <td>{{pacient.telefon}}</td>
+          <td>{{pacient.email}}</td>
+          <td>
+            <button pButton type="button" class="ui-button-info" icon="pi pi-plus"
+              pTooltip="Adaugă programare" tooltipPosition="top" placeholder="Top"
+              (click)="addAppointmentClick(pacient.id)"></button>
+          </td>
+          <td>
+              <button pButton type="button" class="ui-button-info" icon="pi pi-pencil"
+              pTooltip="Editează" tooltipPosition="top" placeholder="Top"
+              (click)="editPacientClick(pacient.id)"></button>
+          </td>
+          <td>
+              <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+              <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
+              pTooltip="Șterge" tooltipPosition="top" placeholder="Top"
+              (click)="confirm(pacient)"></button>
+          </td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div style="text-align: left">
+      <button pButton type="button" icon="pi pi-user-plus" label="Adaugă pacient" routerLink='/receptioner/newpacient'></button>
+    </div>
+  </ng-template>
+</p-table>

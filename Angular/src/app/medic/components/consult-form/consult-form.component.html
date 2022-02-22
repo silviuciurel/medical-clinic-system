@@ -1,0 +1,72 @@
+<form [formGroup]="consultform" (ngSubmit)="onSubmit()">
+  <p-panel header="{{pageTitle}}">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px; height: 350px">
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Data consultației *:
+        </div>
+        <div class="ui-grid-col-3">
+          <p-calendar formControlName="dataConsult" placeholder="Obligatoriu" dateFormat="yy-mm-dd"
+            [monthNavigator]="true" [yearNavigator]="true" yearRange="2010:2030" [disabledDays]="[0,6]"></p-calendar>
+        </div>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="Data consultației este obligatorie"
+            *ngIf="!consultform.controls['dataConsult'].valid&&consultform.controls['dataConsult'].dirty">
+          </p-message>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Anamneza *:
+        </div>
+        <div class="ui-grid-col-6">
+          <textarea pInputTextarea type="text" formControlName="anamneza" placeholder="Obligatoriu"
+            rows="10"></textarea>
+        </div>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="Anamneza este obligatorie"
+            *ngIf="!consultform.controls['anamneza'].valid&&consultform.controls['anamneza'].dirty">
+          </p-message>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Diagnostic *:
+        </div>
+        <div class="ui-grid-col-6">
+          <p-dropdown [options]="diagnostics" formControlName="diagnostic" filter="true" placeholder="Obligatoriu"
+            optionLabel="denumireBoala">
+
+          </p-dropdown>
+        </div>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="Diagnosticul este obligatoriu"
+            *ngIf="!consultform.controls['diagnostic'].valid&&consultform.controls['diagnostic'].dirty">
+          </p-message>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+        <div class="ui-grid-col-3">
+          <button pButton type="submit" label="Salvează" [disabled]="!consultform.valid"></button>
+        </div>
+        <div class="ui-grid-col-3">
+          <button type="button" pButton icon="pi pi-close" (click)="display=false" label="Anulează"
+            class="ui-button-secondary" routerLink="/medic/pacients"></button>
+        </div>
+        <div class="ui-grid-col-4"></div>
+      </div>
+<!--
+      <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+        Form Submitted
+        <br>
+        {{diagnostic}}
+      </div>
+-->
+    </div>
+  </p-panel>
+</form>

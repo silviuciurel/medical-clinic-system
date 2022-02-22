@@ -1,0 +1,28 @@
+<!--
+<full-calendar
+    defaultView="timeGridDay"
+    [plugins]="calendarPlugins"
+    height="full-calendar"
+    [header]="header"
+    [events]="events">
+</full-calendar>
+
+-->
+<p-fullCalendar [events]="events" [options]="options"></p-fullCalendar>
+
+
+
+
+<div class="ui-grid-row ">
+  <div class="ui-grid-col-3">
+    <div class="ui-grid-row">
+  <div class="ui-grid-col-6">
+    <button pButton type="submit" label="Salvează programarea" (click)="addAppointment()"></button>
+  </div>
+  <div class="ui-grid-col-6">
+    <button type="button" pButton icon="pi pi-close" (click)="display=false" label="Anulează"
+      class="ui-button-secondary" routerLink="/receptioner/pacients"></button>
+  </div>
+</div>
+</div>
+</div>

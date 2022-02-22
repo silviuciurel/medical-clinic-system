@@ -1,0 +1,32 @@
+<p-table #dt [columns]="cols" [value]="consults" [responsive]="true" [autoLayout]="true">
+  <ng-template pTemplate="caption">
+    Consultații
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+      </tr>
+      <tr>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                          
+            <input *ngSwitchCase="'dataConsult'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="caută după dată">
+            
+          </th>
+      </tr>
+    
+  </ng-template>
+  <ng-template pTemplate="body" let-consult>
+      <tr>
+          <td>{{consult.pacient.nume}}</td>
+          <td>{{consult.pacient.cnp}}</td>
+          <td>{{consult.dataConsult}}</td>
+          <td>{{consult.anamneza}}</td>
+          <td>{{consult.diagnostic.denumireBoala}}</td>
+      </tr>
+  </ng-template>
+  
+</p-table>
+
+
